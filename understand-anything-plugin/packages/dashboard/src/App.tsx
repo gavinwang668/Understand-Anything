@@ -31,6 +31,7 @@ const PathFinderModal = lazy(() => import("./components/PathFinderModal"));
 const KeyboardShortcutsHelp = lazy(
   () => import("./components/KeyboardShortcutsHelp"),
 );
+const OnboardingOverlay = lazy(() => import("./components/OnboardingOverlay"));
 
 const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === "true";
 const SESSION_TOKEN_KEY = "understand-anything-token";
@@ -610,6 +611,11 @@ function Dashboard({ accessToken }: { accessToken: string }) {
           <PathFinderModal isOpen={pathFinderOpen} onClose={togglePathFinder} />
         </Suspense>
       )}
+
+      {/* First-visit onboarding overlay — auto-hides after dismiss via localStorage. */}
+      <Suspense fallback={null}>
+        <OnboardingOverlay />
+      </Suspense>
     </div>
     </ThemeProvider>
   );
